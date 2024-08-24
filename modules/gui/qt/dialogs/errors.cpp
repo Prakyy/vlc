@@ -27,6 +27,10 @@
 
 #include "dialogs/errors.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QTextCursor>
 #include <QTextEdit>
 #include <QCheckBox>
@@ -40,6 +44,10 @@ ErrorsDialog::ErrorsDialog( intf_thread_t *_p_intf )
     setWindowTitle( qtr( "Errors" ) );
     setWindowRole( "vlc-errors" );
     resize( 500 , 300 );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
+
 
     QGridLayout *layout = new QGridLayout( this );
 

@@ -763,10 +763,13 @@ SPrefsPanel::SPrefsPanel( intf_thread_t *_p_intf, QWidget *_parent,
 
             /* interface */
             char *psz_intf = config_GetPsz( p_intf, "intf" );
-            if( psz_intf )
-            {
+            QString s_style = getSettings()->value("MainWindow/QtStyle", "").toString();
+            if( psz_intf ) {
                 if( strstr( psz_intf, "skin" ) )
                     ui.skins->setChecked( true );
+            } else if ( s_style == "QtDark" ) {
+                /* dark mode */
+                ui.qtdark->setChecked( true );
             } else {
                 /* defaults to qt */
                 ui.qt->setChecked( true );
@@ -775,6 +778,8 @@ SPrefsPanel::SPrefsPanel( intf_thread_t *_p_intf, QWidget *_parent,
 
             optionWidgets["skinRB"] = ui.skins;
             optionWidgets["qtRB"] = ui.qt;
+            optionWidgets["qtdarkRB"] = ui.qtdark;
+            
 #if !defined( _WIN32)
             ui.stylesCombo->addItem( qtr("System's default") );
             ui.stylesCombo->addItems( QStyleFactory::keys() );
@@ -792,6 +797,7 @@ SPrefsPanel::SPrefsPanel( intf_thread_t *_p_intf, QWidget *_parent,
 #endif
             radioGroup = new QButtonGroup(this);
             radioGroup->addButton( ui.qt, 0 );
+            radioGroup->addButton( ui.qtdark, 0 );
             radioGroup->addButton( ui.skins, 1 );
             CONNECT( radioGroup, buttonClicked( int ),
                      ui.styleStackedWidget, setCurrentIndex( int ) );
@@ -1094,9 +1100,15 @@ void SPrefsPanel::apply()
     {
         if( qobject_cast<QRadioButton *>(optionWidgets["skinRB"])->isChecked() )
             config_PutPsz( p_intf, "intf", "skins2,any" );
-        else
+        else if( qobject_cast<QRadioButton *>(optionWidgets["qtdarkRB"])->isChecked() ) {
+            config_PutPsz( p_intf, "intf", "" );
+            getSettings()->setValue( "MainWindow/QtStyle", "QtDark" );
+        } else {
         //if( qobject_cast<QRadioButton *>(optionWidgets[qtRB])->isChecked() )
             config_PutPsz( p_intf, "intf", "" );
+            if( (getSettings()->value("MainWindow/QtStyle", "").toString()) == "QtDark" )
+                getSettings()->setValue( "MainWindow/QtStyle", "" );
+        }
         if( qobject_cast<QComboBox *>(optionWidgets["styleCB"]) )
             getSettings()->setValue( "MainWindow/QtStyle",
                 qobject_cast<QComboBox *>(optionWidgets["styleCB"])->currentText() );

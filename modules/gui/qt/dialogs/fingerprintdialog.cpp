@@ -24,6 +24,10 @@
 #include "adapters/chromaprint.hpp"
 #include <vlc_url.h>
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QLabel>
 #include <QListWidgetItem>
 #include <new>
@@ -34,6 +38,9 @@ FingerprintDialog::FingerprintDialog(QWidget *parent, intf_thread_t *p_intf,
     ui(new Ui::FingerprintDialog), p_r( NULL )
 {
     ui->setupUi(this);
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     ui->stackedWidget->setCurrentWidget( ui->wait );
 

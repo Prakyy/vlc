@@ -34,6 +34,10 @@
 #include "util/animators.hpp"
 #include "util/imagehelper.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <assert.h>
 
 #include <vlc_modules.h>
@@ -79,6 +83,9 @@ PluginDialog::PluginDialog( intf_thread_t *_p_intf ) : QVLCFrame( _p_intf )
 {
     setWindowTitle( qtr( "Plugins and extensions" ) );
     setWindowRole( "vlc-plugins" );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     QVBoxLayout *layout = new QVBoxLayout( this );
     tabs = new QTabWidget( this );
@@ -1374,6 +1381,9 @@ ExtensionInfoDialog::ExtensionInfoDialog( const QModelIndex &index,
 
     // Window title
     setWindowTitle( qtr( "About" ) + " " + index.data(Qt::DisplayRole).toString() );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     // Layout
     QGridLayout *layout = new QGridLayout( this );
@@ -1457,6 +1467,9 @@ AddonInfoDialog::AddonInfoDialog( const QModelIndex &index,
 
     // Window title
     setWindowTitle( qtr( "About" ) + " " + index.data(Qt::DisplayRole).toString() );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     // Layout
     QGridLayout *layout = new QGridLayout( this );

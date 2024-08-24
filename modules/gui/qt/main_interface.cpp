@@ -70,6 +70,10 @@
 # include <X11/Xlib.h>
 #endif
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QTimer>
 
 #include <vlc_actions.h>                    /* Wheel event */
@@ -158,6 +162,11 @@ MainInterface::MainInterface( intf_thread_t *_p_intf ) : QVLCMW( _p_intf )
      *  UI and Widgets design
      **************************/
     setVLCWindowsTitle();
+    
+#ifdef Q_OS_WIN
+    //set dark titlebar
+    checkAndSetDarkMode( (HWND)this->winId(), p_intf );
+#endif
 
     /************
      * Menu Bar *

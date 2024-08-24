@@ -37,6 +37,10 @@
 #include "input_manager.hpp"                      /* art signal */
 #include "main_interface.hpp"                     /* DropEvent TODO remove this*/
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QMenu>
 #include <QSignalMapper>
 #include <QSlider>
@@ -165,6 +169,9 @@ PlaylistWidget::PlaylistWidget( intf_thread_t *_p_i, QWidget *_par )
     setWindowTitle( qtr( "Playlist" ) );
     setWindowRole( "vlc-playlist" );
     setWindowIcon( QApplication::windowIcon() );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 }
 
 PlaylistWidget::~PlaylistWidget()
