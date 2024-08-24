@@ -30,6 +30,5 @@ void checkAndSetDarkMode(HWND hwnd, intf_thread_t *p_intf) {
     if (theme == "None") {
         theme = getSettings()->value("MainWindow/QtStyle", "").toString();
     }
-        setDarkTitlebar(hwnd);
-    }
+    setDarkTitlebar(hwnd);
 }
