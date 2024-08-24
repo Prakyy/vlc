@@ -26,11 +26,18 @@
 
 #include "podcast_configuration.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 PodcastConfigDialog::PodcastConfigDialog( intf_thread_t *_p_intf)
                     : QVLCDialog( (QWidget*)_p_intf->p_sys->p_mi, _p_intf )
 
 {
     ui.setupUi( this );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     ui.podcastDelete->setToolTip( qtr( "Deletes the selected item" ) );
     QPushButton *okButton = new QPushButton( qtr( "&Close" ), this );

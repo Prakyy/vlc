@@ -30,6 +30,10 @@
 
 #include "util/qt_dirs.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QMimeData>
 #include <QHBoxLayout>
 
@@ -39,6 +43,9 @@ PlaylistDialog::PlaylistDialog( intf_thread_t *_p_intf )
     setWindowTitle( qtr( "Playlist" ) );
     setWindowRole( "vlc-playlist" );
     setWindowOpacity( var_InheritFloat( p_intf, "qt-opacity" ) );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     playlistWidget = new PlaylistWidget( p_intf, this );
     setCentralWidget( playlistWidget );

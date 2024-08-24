@@ -27,6 +27,10 @@
 #include "dialogs/bookmarks.hpp"
 #include "input_manager.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QHBoxLayout>
 #include <QSpacerItem>
 #include <QPushButton>
@@ -40,6 +44,10 @@ BookmarksDialog::BookmarksDialog( intf_thread_t *_p_intf ):QVLCFrame( _p_intf )
     setWindowOpacity( var_InheritFloat( p_intf, "qt-opacity" ) );
     setWindowTitle( qtr( "Edit Bookmarks" ) );
     setWindowRole( "vlc-bookmarks" );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
+    
 
     QHBoxLayout *layout = new QHBoxLayout( this );
 

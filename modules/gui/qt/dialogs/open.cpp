@@ -29,6 +29,10 @@
 #include "recents.hpp"
 #include "util/qt_dirs.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QTabWidget>
 #include <QRegExp>
 #include <QMenu>
@@ -78,6 +82,9 @@ OpenDialog::OpenDialog( QWidget *parent,
     setWindowTitle( qtr( "Open Media" ) );
     setWindowRole( "vlc-open-media" );
     setWindowModality( Qt::WindowModal );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     /* Tab definition and creation */
     fileOpenPanel    = new FileOpenPanel( this, p_intf );

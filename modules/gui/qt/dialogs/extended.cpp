@@ -32,6 +32,10 @@
 #include "main_interface.hpp" /* Needed for external MI size */
 #include "input_manager.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QTabWidget>
 #include <QGridLayout>
 #include <QDialogButtonBox>
@@ -50,6 +54,9 @@ ExtendedDialog::ExtendedDialog( intf_thread_t *_p_intf )
     setWindowOpacity( var_InheritFloat( p_intf, "qt-opacity" ) );
     setWindowTitle( qtr( "Adjustments and Effects" ) );
     setWindowRole( "vlc-extended" );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     QVBoxLayout *layout = new QVBoxLayout( this );
     layout->setContentsMargins( 0, 2, 0, 1 );

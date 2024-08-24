@@ -36,6 +36,10 @@
 #include "util/qvlcframe.hpp"
 #include "main_interface.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QHBoxLayout>
 #include <QGroupBox>
 #include <QRadioButton>
@@ -56,6 +60,9 @@ PrefsDialog::PrefsDialog( QWidget *parent, intf_thread_t *_p_intf )
     setWindowTitle( qtr( "Preferences" ) );
     setWindowRole( "vlc-preferences" );
     setWindowModality( Qt::WindowModal );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     /* Whether we want it or not, we need to destroy on close to get
        consistency when reset */

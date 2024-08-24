@@ -27,6 +27,10 @@
 # include "config.h"
 #endif
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #ifdef ENABLE_VLM
 #include "dialogs/vlm.hpp"
 #include "dialogs/open.hpp"
@@ -68,6 +72,10 @@ VLMDialog::VLMDialog( intf_thread_t *_p_intf ) : QVLCFrame( _p_intf )
     // UI stuff
     ui.setupUi( this );
     ui.saveButton->hide();
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
+
 
 #define ADDMEDIATYPES( str, type ) ui.mediaType->addItem( qtr( str ), QVariant( type ) );
     ADDMEDIATYPES( N_("Broadcast"), QVLM_Broadcast );
