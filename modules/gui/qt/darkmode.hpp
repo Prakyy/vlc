@@ -1,6 +1,10 @@
 #ifndef DARKMODE_HPP
 #define DARKMODE_HPP
 
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
+
 #include <windows.h>
 #include <dwmapi.h>
 

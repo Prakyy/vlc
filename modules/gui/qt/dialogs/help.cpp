@@ -246,7 +246,7 @@ UpdateDialog::UpdateDialog( intf_thread_t *_p_intf ) : QVLCFrame( _p_intf )
     setWindowTitle( qtr( "VLC media player updates" ) );
     setWindowRole( "vlc-update" );
 #ifdef Q_OS_WIN
-    checkAndSetDarkMode( (HWND)this->winId(), intf );
+    checkAndSetDarkMode( (HWND)this->winId(), p_intf );
 #endif
 
     BUTTONACT( recheckButton, UpdateOrDownload() );

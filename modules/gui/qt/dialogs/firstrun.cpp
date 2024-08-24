@@ -40,7 +40,7 @@ FirstRun::FirstRun( QWidget *_p, intf_thread_t *_p_intf  )
     buildPrivDialog();
     setVisible( true );
 #ifdef Q_OS_WIN
-    checkAndSetDarkMode( (HWND)this->winId(), intf );
+    checkAndSetDarkMode( (HWND)this->winId(), p_intf );
 #endif
 }
 

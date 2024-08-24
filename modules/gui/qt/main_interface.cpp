@@ -165,7 +165,7 @@ MainInterface::MainInterface( intf_thread_t *_p_intf ) : QVLCMW( _p_intf )
     
 #ifdef Q_OS_WIN
     //set dark titlebar
-    checkAndSetDarkMode( (HWND)this->winId(), intf );
+    checkAndSetDarkMode( (HWND)this->winId(), p_intf );
 #endif
 
     /************

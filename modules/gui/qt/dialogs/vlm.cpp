@@ -27,15 +27,15 @@
 # include "config.h"
 #endif
 
-#ifdef Q_OS_WIN
-#include "darkmode.hpp"
-#endif
-
 #ifdef ENABLE_VLM
 #include "dialogs/vlm.hpp"
 #include "dialogs/open.hpp"
 #include "dialogs/sout.hpp"
 #include "util/qt_dirs.hpp"
+
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
 
 #include <QString>
 #include <QComboBox>
