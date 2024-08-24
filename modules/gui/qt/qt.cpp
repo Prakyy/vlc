@@ -31,6 +31,7 @@
 #include <QApplication>
 #include <QDate>
 #include <QMutex>
+#inculde <QStyleFactory>
 
 #include "qt.hpp"
 
