@@ -713,12 +713,13 @@ static int Open( vlc_object_t * p_this )
                 }
                 else
                 {
-                    tk->fmt.i_codec = p_bih->biCompression;
+                    tk->fmt.i_codec = vlc_fourcc_GetCodec(VIDEO_ES, p_bih->biCompression);
                     if( tk->fmt.i_codec == VLC_CODEC_MP4V &&
                         !strncasecmp( (char*)&p_strh->i_handler, "XVID", 4 ) )
                     {
                         tk->fmt.i_codec           =
                         tk->fmt.i_original_fourcc = VLC_FOURCC( 'X', 'V', 'I', 'D' );
+                        tk->fmt.b_packetized = false;
                     }
 
                     /* Shitty files storing chroma in biCompression */
