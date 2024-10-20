@@ -29,6 +29,10 @@
 #include "dialogs/mediainfo.hpp"
 #include "input_manager.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <vlc_url.h>
 
 #include <QTabWidget>
@@ -53,6 +57,9 @@ MediaInfoDialog::MediaInfoDialog( intf_thread_t *_p_intf,
     else
         setWindowTitle( qtr( "Media Information" ) );
     setWindowRole( "vlc-media-info" );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     setWindowFlags( Qt::Window | Qt::CustomizeWindowHint |
                     Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint );

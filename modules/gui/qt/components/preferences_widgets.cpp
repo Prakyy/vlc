@@ -40,6 +40,10 @@
 #include <vlc_modules.h>
 #include <vlc_plugin.h>
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QString>
 #include <QVariant>
 #include <QGridLayout>
@@ -1407,6 +1411,9 @@ KeyInputDialog::KeyInputDialog( QTreeWidget *_table,
     setWindowTitle( ( b_global ? qtr( "Global" ) + QString(" ") : "" )
                     + qtr( "Hotkey change" ) );
     setWindowRole( "vlc-key-input" );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     QVBoxLayout *vLayout = new QVBoxLayout( this );
     selected = new QLabel( qtr( "Press the new key or combination for " )

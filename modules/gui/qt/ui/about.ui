@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>744</width>
-    <height>360</height>
+    <height>382</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,7 +54,7 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="margin" stdset="0">
     <number>0</number>
    </property>
    <item>
@@ -66,8 +66,7 @@
       </sizepolicy>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(245, 245, 245);
-color:rgb(0,0,0);</string>
+      <string notr="true"/>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="2" column="2" rowspan="4">
@@ -92,7 +91,7 @@ color:rgb(0,0,0);</string>
           </sizepolicy>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
-          <property name="margin">
+          <property name="margin" stdset="0">
            <number>0</number>
           </property>
           <item>
@@ -145,7 +144,7 @@ color:rgb(0,0,0);</string>
              <string notr="true">padding-right: 20px;</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
             </property>
             <property name="wordWrap">
              <bool>true</bool>
@@ -165,26 +164,26 @@ color:rgb(0,0,0);</string>
           </font>
          </property>
          <property name="frameShadow">
-          <enum>QFrame::Plain</enum>
+          <enum>QFrame::Shadow::Plain</enum>
          </property>
          <property name="textInteractionFlags">
-          <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+          <set>Qt::TextInteractionFlag::TextSelectableByKeyboard|Qt::TextInteractionFlag::TextSelectableByMouse</set>
          </property>
         </widget>
         <widget class="QTextEdit" name="authorsPage">
          <property name="frameShadow">
-          <enum>QFrame::Plain</enum>
+          <enum>QFrame::Shadow::Plain</enum>
          </property>
          <property name="textInteractionFlags">
-          <set>Qt::NoTextInteraction</set>
+          <set>Qt::TextInteractionFlag::NoTextInteraction</set>
          </property>
         </widget>
         <widget class="QTextEdit" name="creditPage">
          <property name="frameShadow">
-          <enum>QFrame::Plain</enum>
+          <enum>QFrame::Shadow::Plain</enum>
          </property>
          <property name="textInteractionFlags">
-          <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse</set>
+          <set>Qt::TextInteractionFlag::LinksAccessibleByKeyboard|Qt::TextInteractionFlag::LinksAccessibleByMouse</set>
          </property>
         </widget>
        </widget>
@@ -213,7 +212,7 @@ color:rgb(0,0,0);</string>
          <string/>
         </property>
         <property name="textFormat">
-         <enum>Qt::PlainText</enum>
+         <enum>Qt::TextFormat::PlainText</enum>
         </property>
         <property name="pixmap">
          <pixmap>:/logo/vlc256.png</pixmap>
@@ -247,7 +246,7 @@ color:rgb(0,0,0);</string>
          </size>
         </property>
         <property name="alignment">
-         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+         <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
         </property>
        </widget>
       </item>
@@ -289,10 +288,10 @@ margin-bottom: 6px;</string>
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(230, 230, 230);color:rgb(0,0,0);</string>
+      <string notr="true"/>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <property name="margin">
+      <property name="margin" stdset="0">
        <number>0</number>
       </property>
       <item>
@@ -304,7 +303,7 @@ margin-bottom: 6px;</string>
          <string notr="true">padding: 10px</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -317,7 +316,7 @@ margin-bottom: 6px;</string>
          <string notr="true">padding: 10px</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -330,7 +329,7 @@ margin-bottom: 6px;</string>
          <string notr="true">padding: 10px;</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
        </widget>
       </item>

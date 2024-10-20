@@ -28,6 +28,10 @@
 
 #include "input_manager.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QTabWidget>
 #include <QLabel>
 #include <QTimeEdit>
@@ -41,7 +45,9 @@ GotoTimeDialog::GotoTimeDialog( intf_thread_t *_p_intf)
     setWindowFlags( Qt::Tool );
     setWindowTitle( qtr( "Go to Time" ) );
     setWindowRole( "vlc-goto-time" );
-
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
     QGridLayout *mainLayout = new QGridLayout( this );
     mainLayout->setSizeConstraint( QLayout::SetFixedSize );
 

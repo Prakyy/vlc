@@ -41,6 +41,10 @@
 #include <QKeyEvent>
 #include "util/customwidgets.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 ExtensionsDialogProvider *ExtensionsDialogProvider::instance = NULL;
 
 static void DialogCallback( extension_dialog_t *p_ext_dialog,
@@ -175,7 +179,9 @@ ExtensionDialog::ExtensionDialog( intf_thread_t *_p_intf,
     this->setWindowFlags( Qt::WindowMinMaxButtonsHint
                         | Qt::WindowCloseButtonHint );
     this->setWindowTitle( qfu( p_dialog->psz_title ) );
-
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif    
     layout = new QGridLayout( this );
     clickMapper = new QSignalMapper( this );
     CONNECT( clickMapper, mapped( QObject* ), this, TriggerClick( QObject* ) );

@@ -31,6 +31,10 @@
 
 #include "util/qt_dirs.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QLabel>
 #include <QGroupBox>
 #include <QDialogButtonBox>
@@ -47,6 +51,9 @@ ConvertDialog::ConvertDialog( QWidget *parent, intf_thread_t *_p_intf,
 {
     setWindowTitle( qtr( "Convert" ) );
     setWindowRole( "vlc-convert" );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     QGridLayout *mainLayout = new QGridLayout( this );
     SoutInputBox *inputBox = new SoutInputBox( this );

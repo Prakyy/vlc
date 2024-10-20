@@ -23,6 +23,10 @@
 
 #include "dialogs/firstrun.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QCheckBox>
@@ -35,6 +39,9 @@ FirstRun::FirstRun( QWidget *_p, intf_thread_t *_p_intf  )
     msg_Dbg( p_intf, "Boring first Run Wizard" );
     buildPrivDialog();
     setVisible( true );
+#ifdef Q_OS_WIN
+    checkAndSetDarkMode( (HWND)this->winId(), p_intf );
+#endif
 }
 
 void FirstRun::save()

@@ -30,6 +30,10 @@
 #include "components/epg/EPGItem.hpp"
 #include <vlc_playlist.h>
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QVBoxLayout>
 #include <QSplitter>
 #include <QScrollBar>
@@ -47,6 +51,9 @@
 EpgDialog::EpgDialog( intf_thread_t *_p_intf ): QVLCFrame( _p_intf )
 {
     setWindowTitle( qtr( "Program Guide" ) );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     QVBoxLayout *layout = new QVBoxLayout( this );
     layout->setMargin( 0 );

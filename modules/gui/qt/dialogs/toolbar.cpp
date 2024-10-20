@@ -36,6 +36,10 @@
 #include "util/buttons/RoundButton.hpp"
 #include "util/imagehelper.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include "qt.hpp"
 #include "input_manager.hpp"
 #include <vlc_vout.h>                       /* vout_thread_t for aspect ratio combobox */
@@ -66,6 +70,9 @@ ToolbarEditDialog::ToolbarEditDialog( QWidget *_w, intf_thread_t *_p_intf)
     QGridLayout *mainLayout = new QGridLayout( this );
     setMinimumWidth( 600 );
     setAttribute( Qt::WA_DeleteOnClose );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     /* main GroupBox */
     QGroupBox *widgetBox = new QGroupBox( qtr( "Toolbar Elements") , this );

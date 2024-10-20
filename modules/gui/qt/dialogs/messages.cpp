@@ -46,6 +46,10 @@
 
 #include "dialogs/messages.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 enum {
     MsgEvent_Type = QEvent::User + MsgEventTypeOffset + 1,
 };
@@ -79,6 +83,10 @@ MessagesDialog::MessagesDialog( intf_thread_t *_p_intf)
 {
     setWindowTitle( qtr( "Messages" ) );
     setWindowRole( "vlc-messages" );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
+
     /* Build Ui */
     ui.setupUi( this );
     ui.bottomButtonsBox->addButton( new QPushButton( qtr("&Close"), this ),

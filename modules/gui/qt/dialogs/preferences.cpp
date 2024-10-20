@@ -36,6 +36,10 @@
 #include "util/qvlcframe.hpp"
 #include "main_interface.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QHBoxLayout>
 #include <QGroupBox>
 #include <QRadioButton>
@@ -56,6 +60,9 @@ PrefsDialog::PrefsDialog( QWidget *parent, intf_thread_t *_p_intf )
     setWindowTitle( qtr( "Preferences" ) );
     setWindowRole( "vlc-preferences" );
     setWindowModality( Qt::WindowModal );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     /* Whether we want it or not, we need to destroy on close to get
        consistency when reset */
@@ -331,17 +338,31 @@ void PrefsDialog::cancel()
 /* Reset all the preferences, when you click the button */
 void PrefsDialog::reset()
 {
-    int ret = QMessageBox::question(
-                 this,
-                 qtr( "Reset Preferences" ),
-                 qtr( "Are you sure you want to reset your VLC media player preferences?" ),
-                 QMessageBox::Ok | QMessageBox::Cancel,
-                 QMessageBox::Ok);
+    // Create the QMessageBox object
+    QMessageBox msgBox(this);
 
-    if( ret == QMessageBox::Ok )
+    // Set the icon, title, and message text
+    msgBox.setIcon(QMessageBox::Question);
+    msgBox.setWindowTitle(qtr("Reset Preferences"));
+    msgBox.setText(qtr("Are you sure you want to reset your VLC media player preferences?"));
+    
+    // Set the buttons
+    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+
+    // Apply dark title bar
+#ifdef Q_OS_WIN
+    HWND hwnd = reinterpret_cast<HWND>(msgBox.winId());
+    setDarkTitlebar(hwnd);
+#endif
+
+    // Execute the dialog modally
+    int ret = msgBox.exec();
+
+    if (ret == QMessageBox::Ok)
     {
-        config_ResetAll( p_intf );
-        config_SaveConfigFile( p_intf );
+        config_ResetAll(p_intf);
+        config_SaveConfigFile(p_intf);
         getSettings()->clear();
 
 #ifdef _WIN32
@@ -351,6 +372,7 @@ void PrefsDialog::reset()
         accept();
     }
 }
+
 
 void PrefsDialog::advancedTreeFilterChanged( const QString & text )
 {

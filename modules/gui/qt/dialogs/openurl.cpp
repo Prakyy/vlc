@@ -29,6 +29,10 @@
 #include "util/searchlineedit.hpp"
 #include "util/validators.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QPushButton>
 #include <QDialogButtonBox>
 #include <QApplication>
@@ -46,6 +50,9 @@ OpenUrlDialog::OpenUrlDialog( intf_thread_t *_p_intf,
 {
     setWindowTitle( qtr( "Open URL" ) );
     setWindowRole( "vlc-open-url" );
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
 
     /* Buttons */
     QPushButton *but;

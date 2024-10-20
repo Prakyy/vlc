@@ -33,6 +33,10 @@
 #include "dialogs/sout.hpp"
 #include "util/qt_dirs.hpp"
 
+#ifdef Q_OS_WIN
+#include "darkmode.hpp"
+#endif
+
 #include <QString>
 #include <QComboBox>
 #include <QVBoxLayout>
@@ -68,6 +72,10 @@ VLMDialog::VLMDialog( intf_thread_t *_p_intf ) : QVLCFrame( _p_intf )
     // UI stuff
     ui.setupUi( this );
     ui.saveButton->hide();
+#ifdef Q_OS_WIN
+    setDarkTitlebar( (HWND)this->winId() );
+#endif
+
 
 #define ADDMEDIATYPES( str, type ) ui.mediaType->addItem( qtr( str ), QVariant( type ) );
     ADDMEDIATYPES( N_("Broadcast"), QVLM_Broadcast );
